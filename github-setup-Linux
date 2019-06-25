@@ -1,0 +1,56 @@
+
+Step1	Signup for Git hub account.
+Step2	Create Repository
+a.	In the upper-right corner of any page, click , and then click New repository.
+b.	Type a short, memorable name for your repository. For example, "hello-world".
+c.	Optionally, add a description of your repository. For example, "My first repository on GitHub."
+d.	Choose to make the repository either public or private. Public repositories are visible to the public, while private repositories are only accessible to you, and people you share them with. For more information, see "Setting repository visibility."
+e.	Select Initialize this repository with a README.
+f.	Click Create repository.
+Step3	Install git package “apt install git”
+Step4	Make directory where you want to save your git projects (mkdir /projects)
+Step5	Change directory (e.g cd /projects)
+Step6	Setup git account on Linux or windows
+a.	git config --global user.email your-email@gmail.com
+b.	git config --global user.name "your-git-hub-username"
+c.	echo “# Anything you want to add” >> README.md
+d.	git init
+e.	git add README.md
+f.	git commit -m “first commit”
+g.	git remote add origin “your repository link which have been created on step2”
+h.	git push -u origin master
+i.	Now Enter username and password to push to github
+j.	Once you done step, I go back to git hub account on web and check it out.
+Step7	Here is tedious thing every time you save or make any changes you have to enter username and password.
+Step8	To over come from password prompt lets setup ssh  between your machine and github.
+Step9	Switching remote URLs from HTTPS to SSH
+a.	List your existing remotes in order to get the name of the remote you want to change.
+i.	“git remote -v”
+origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+origin  https://github.com/USERNAME/REPOSITORY.git (push)
+b.	Change your remote's URL from HTTPS to SSH with the git remote set-url command.
+“git remote set-url origin git@github.com:USERNAME/REPOSITORY.git”
+Step10	Generating a new SSH key and adding it to the ssh-agent
+a.	Open Terminal.
+b.	Paste the text below, substituting in your GitHub email address
+i.	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+Step11	Adding your SSH key to the ssh-agent
+a.	Start the ssh-agent in the background.
+i.	eval "$(ssh-agent -s)"
+b.	Add your SSH private key to the ssh-agent. If you created your key with a different name, or if you are adding an existing key that has a different name, replace id_rsa in the command with the name of your private key file.
+i.	ssh-add ~/.ssh/id_rsa
+Step12	Adding a new SSH key to your GitHub account
+a.	Copy the SSH key to your clipboard.
+i.	sudo apt-get install xclip
+ii.	xclip -sel clip < ~/.ssh/id_rsa.pub
+b.	go back to your git hub web page
+c.	In the upper-right corner of any page, click your profile photo, then click Settings.
+d.	In the user settings sidebar, click SSH and GPG keys.
+e.	Click New SSH key or Add SSH key.
+f.	In the "Title" field, add a descriptive label for the new key. For example, if you're using a personal Mac, you might call this key "Personal-Computer".
+g.	Paste your key into the "Key" field.
+h.	Click Add SSH key.
+i.	If prompted, confirm your GitHub password.
+Step13	Enjoy.
+
+
