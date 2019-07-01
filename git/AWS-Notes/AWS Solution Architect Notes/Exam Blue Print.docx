@@ -1,0 +1,198 @@
+
+google aws certification training
+
+130 Minutes in length
+60 questions
+Multiple choice
+results are  between 100-1000 with a passing score of 720
+Aim for 70%
+Qualification is valid for 2 years
+scenario based questions
+
+===================
+History of aws
+===================
+
+"Invention requires two things
+1. The ability to try a lot of experiments,
+2. nto having to live with the collateral damage of failed experiments
+"
+
+
+SQS is decouple components.
+
+======================
+AWS Service Overview
+======================
+
+AWS Global Infrastructure
+
+A Region is a geographical area. Each Region consist of 2 or more Availability Zones(Data Centers)
+
+
+Edge Locations(caching content)
+    This are endpoints for AWS which are used for caching content. typically this consists of CloudFront, Amazon's content Delivery Network(CDN)
+    There are many more Edge locations than regions currently there are over 150 Edge locations
+
+Bread and Butter of Service:
+    1.  Security, identity and compliance
+            IAM
+    2.  Compute
+            EC2
+            LAMBDA
+    3.  Storage
+            S3
+    4.  Network and content Delivery
+            ROUTE53
+            VPC
+            CloudFront
+    5.  Databases
+            RDS
+            DynamoDB
+
+================
+SIGNUP WITH FREE TIER ACCOUNT
+================
+
+create an aws ACCOUNT
+    email address
+    password
+    confirm password
+    AWS account Name
+
+
+=============================
+*****************IAM*********
+=============================
+
+IAM
+    IAM allows you to manage users and their level of access to the AWS Console.
+    Features:
+        Centralised control of your AWS account
+        Shared Access to your AWS account
+        Granular Permissions
+        identity Federation(Facebook,etc)
+        Multifactor Authentication
+        provide temporary access for users and servcies where necessary
+        Allows you to set up your own password rotation policy
+        Integrates with many different AWS servcies
+        Supports PCI DSS compliance
+
+    Key Terminology for IAM
+        1.  users
+                End users such as people, employees of an organizations etc.
+        2.  Groups
+                A collection of users, Each user in the group will inherit the permissions of the group
+        3.  Policies
+                Policies are made up of documents, called policy documents. These documents are in a format called JSON and they give permissions as to what a user/group/role is able to do.
+        4.  Roles
+                You create roles and then assign them to AWS Resources
+
+IAM accoutns are global basis.
+
+Exam Tips for IAM
+    1.  IAM is universal. it does not apply to regions at this time.
+    2.  The "root account" is simply the account created when first setup your aws account. it has complete Admin access.
+    3.  New Users have NO permissions when first created.
+    4.  New users are assigned ACcess key ID and Secret Access keys when first created.
+    5.  These are not the same as a password. you cannot use the Access key id and secret access key to login in to the console. you can use this to access AWS via the APIs and Command Line, however.
+    6.  You only get to view these once. if you lose them, you have to regenerate them. so, save them in a secure locations.
+    7.  Always setup MFA on your root account.
+    8.  you can create and customise your own password rotation Policies.
+
+==================================================================================
+                    Cloud Watch Billing Alarm
+==================================================================================
+
+
+
+=======================
+        S3  
+=======================
+
+S3 Simple Storage Service
+    S3 Provides developers and IT Teams with secure, durable, highly-scalable object storage. S3 is easy to use, with a simple web services interface to store and retrieve an y amount of data from anywhere on the web.
+    s3 is a safe place to store your files.
+    it is object-based storage.
+    The Data is spread across multiple devices and facilities.
+
+S3-Basics
+    *.  S3 is object-based -- ie allows you to upload.
+    *.  Files can be from 0 Bytes to 5 TB.
+    *.  There is unlimited Storage.
+    *.   Files are Stored in Buckets.
+    *.  S3 is a universal namespace.
+    *.  when you upload a file to S3, you will receive a HTTP 200 Code if the upload was successful.
+S3-Objects
+    S3 is Objects based. Think of Objects just as files.
+    Objects consist of the following:
+        Key
+        Value
+        Version ID
+        Metadata
+        Subresources
+            Access control lists
+            Torrents
+
+Data Consistency Model for s3
+    How does data consistency work for S3?
+        Read after Write consistency for PUTS of new Objects
+        Eventual Consistency for overwrite PUTS and DELETES
+
+S3-Guarantees
+    Built for 99.99% Availability for the S3 Platform
+    Amazon Guarantees 99.99% Availability
+    Amazon Guarantees 99.99999999999% durability for S3 information(Remember 11 x 9s
+
+S3-Features
+    Tiered Storage Available
+    Lifecycle Management
+    Versioning
+    Encryption
+    MFA Deletes
+    Secure your data using Access Control List and Buckets Policies
+
+S3 Storage Classes
+    S3-Standard
+        99.99% Availability,durability,stored redundantly across multiple devices in multiple facilities and is designed to sustain the loss of 2 facilities concurrently
+    S3-IA(Infrequently Accessed)
+        For data that is accessed less frequently, but requires rapid access when needed. Lower fee than S3, but you are charged a retrieve fee.
+    S3 One Zone-IA 
+        For Where you want a Lower-cost option for Infrequently accessed data, but do not requires the multiple Availability Zone data resilience.
+    S3- Intelligent Tiering
+        designed to optimize costs by automatically moving data to the most cost-effective access tier,without performance impact or operational overhead
+    S3-Glacier
+        S3 Glacier is a secure,durable,and low-cost storage class for data archiving. you can reliably store any amount of data at costs that are competitive with or cheaper than on-premises solutions. Retrieval times configurable from minutes to hours
+    S3-Glacier Deep Archive
+        S3 Glacier Deep Archive is Amazon S3's lowest-cost storage class where a retrieve tiem of 12 hours is acceptable.
+
+S3-Charges based on
+    Storage
+    Requests
+    Storage Management Pricing
+    Data Transfer Pricing
+    Transfer Acceleration(CloudFront)
+    Cross Region Replication Pricing(high Availability)
+
+
+Exam Tips
+    Remember that s3 is object based
+    files can be from 0 Bytes to 5 TB
+    There is unlimited storage
+    files are stored in Buckets
+    s3 is a universal namespace
+    https://s3-eu-west-1.Amazonaws.com/acloudguru
+    not suitable to install an operating system on.
+    successful uploads will generate a HTTP 200 Status Code
+    you can turn on MFS Deletes
+    key
+    Value
+    version id
+    Metadata
+    Subresources
+        access control lists
+        Torrents
+    Read after wirte consistency for PUTS of new object
+    Eventual Consistency for overwrite PUTS and DELETES
+
+notes: Upon sign-up, new AWS customers receive 5 GB of Amazon S3 Standard storage, 20,000 Get Requests, 2,000 Put Requests, 15GB of data transfer in, and 15GB of data transfer out each month for one year.
