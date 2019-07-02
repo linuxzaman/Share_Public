@@ -1,0 +1,52 @@
+ pip install mysql-connector
+ 1547  vi mysql.py
+ 1548  python mysql.py
+ 1549  vi mysql.py
+ 1550  pip install mysql-connector-python
+ 1551  python mysql.py
+ 1552  python
+ 1553  pip install mysql-connector-python-rf
+ 1554  python mysql.py
+ 1555  pip3 install mysql-connector
+ 1556  python3 mysql.py
+ 1557  wget http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-2.1.6.tar.gz
+ 1558  tar -xf mysql-connector-python-2.1.6.tar.gz
+ 1559  cd mysql-connector-python-2.1.6/
+ 1560  sudo python3 setup.py install
+ 1561  python
+ 1562  ls
+ 1563  cd ..
+ 1564  ls
+ 1565  python mysql.py
+ 1566  python3 mysql.py
+ 1567  python
+ 1568  cd -
+ 1569  ls
+ 1570  python
+ 1571  ls
+ 1572  cp -r ../mysql.py .
+ 1573  ls
+ 1574  python mysql.py
+ 1575  python3 mysql.py
+ 1576  python
+ 1577  rm mysql.py
+ 1578  ls
+ 1579  python
+ 1580  ls
+ 1581  cd ..
+ 1582  ls
+ 1583  rm mysql-connector-python-2.1.6
+ 1584  ls
+ 1585  cp mysql.py test.py
+ 1586  rm -rf my*
+ 1587  ls
+ 1588  rm -rf __pycache__/
+ 1589  ls
+ 1590  python test.py
+ 1591  python
+ 1592  vi test.py
+ 1593  python test.py
+ 1594  vi test.py
+ 1595  python test.py
+ 1596  vi test.py
+ 1597  python test.py

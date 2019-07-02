@@ -110,89 +110,205 @@ Exam Tips for IAM
         S3  
 =======================
 
-S3 Simple Storage Service
-    S3 Provides developers and IT Teams with secure, durable, highly-scalable object storage. S3 is easy to use, with a simple web services interface to store and retrieve an y amount of data from anywhere on the web.
-    s3 is a safe place to store your files.
-    it is object-based storage.
-    The Data is spread across multiple devices and facilities.
+    S3 Simple Storage Service
+        S3 Provides developers and IT Teams with secure, durable, highly-scalable object storage. S3 is easy to use, with a simple web services interface to store and retrieve an y amount of data from anywhere on the web.
+        s3 is a safe place to store your files.
+        it is object-based storage.
+        The Data is spread across multiple devices and facilities.
 
-S3-Basics
-    *.  S3 is object-based -- ie allows you to upload.
-    *.  Files can be from 0 Bytes to 5 TB.
-    *.  There is unlimited Storage.
-    *.   Files are Stored in Buckets.
-    *.  S3 is a universal namespace.
-    *.  when you upload a file to S3, you will receive a HTTP 200 Code if the upload was successful.
-S3-Objects
-    S3 is Objects based. Think of Objects just as files.
-    Objects consist of the following:
-        Key
+    S3-Basics
+        *.  S3 is object-based -- ie allows you to upload.
+        *.  Files can be from 0 Bytes to 5 TB.
+        *.  There is unlimited Storage.
+        *.   Files are Stored in Buckets.
+        *.  S3 is a universal namespace.
+        *.  when you upload a file to S3, you will receive a HTTP 200 Code if the upload was successful.
+    S3-Objects
+        S3 is Objects based. Think of Objects just as files.
+        Objects consist of the following:
+            Key
+            Value
+            Version ID
+            Metadata
+            Subresources
+                Access control lists
+                Torrents
+
+    Data Consistency Model for s3
+        How does data consistency work for S3?
+            Read after Write consistency for PUTS of new Objects
+            Eventual Consistency for overwrite PUTS and DELETES
+
+    S3-Guarantees
+        Built for 99.99% Availability for the S3 Platform
+        Amazon Guarantees 99.99% Availability
+        Amazon Guarantees 99.99999999999% durability for S3 information(Remember 11 x 9s
+
+    S3-Features
+        Tiered Storage Available
+        Lifecycle Management
+        Versioning
+        Encryption
+        MFA Deletes
+        Secure your data using Access Control List and Buckets Policies
+
+    S3 Storage Classes
+        S3-Standard
+            99.99% Availability,durability,stored redundantly across multiple devices in multiple facilities and is designed to sustain the loss of 2 facilities concurrently
+        S3-IA(Infrequently Accessed)
+            For data that is accessed less frequently, but requires rapid access when needed. Lower fee than S3, but you are charged a retrieve fee.
+        S3 One Zone-IA 
+            For Where you want a Lower-cost option for Infrequently accessed data, but do not requires the multiple Availability Zone data resilience.
+        S3- Intelligent Tiering
+            designed to optimize costs by automatically moving data to the most cost-effective access tier,without performance impact or operational overhead
+        S3-Glacier
+            S3 Glacier is a secure,durable,and low-cost storage class for data archiving. you can reliably store any amount of data at costs that are competitive with or cheaper than on-premises solutions. Retrieval times configurable from minutes to hours
+        S3-Glacier Deep Archive
+            S3 Glacier Deep Archive is Amazon S3's lowest-cost storage class where a retrieve tiem of 12 hours is acceptable.
+
+    S3-Charges based on
+        Storage
+        Requests
+        Storage Management Pricing
+        Data Transfer Pricing
+        Transfer Acceleration(CloudFront)
+        Cross Region Replication Pricing(high Availability)
+
+
+    Exam Tips
+        Remember that s3 is object based
+        files can be from 0 Bytes to 5 TB
+        There is unlimited storage
+        files are stored in Buckets
+        s3 is a universal namespace
+        https://s3-eu-west-1.Amazonaws.com/acloudguru
+        not suitable to install an operating system on.
+        successful uploads will generate a HTTP 200 Status Code
+        you can turn on MFS Deletes
+        key
         Value
-        Version ID
+        version id
         Metadata
         Subresources
-            Access control lists
+            access control lists
             Torrents
-
-Data Consistency Model for s3
-    How does data consistency work for S3?
-        Read after Write consistency for PUTS of new Objects
+        Read after wirte consistency for PUTS of new object
         Eventual Consistency for overwrite PUTS and DELETES
 
-S3-Guarantees
-    Built for 99.99% Availability for the S3 Platform
-    Amazon Guarantees 99.99% Availability
-    Amazon Guarantees 99.99999999999% durability for S3 information(Remember 11 x 9s
+    notes: Upon sign-up, new AWS customers receive 5 GB of Amazon S3 Standard storage, 20,000 Get Requests, 2,000 Put Requests, 15GB of data transfer in, and 15GB of data transfer out each month for one year.
 
-S3-Features
-    Tiered Storage Available
-    Lifecycle Management
-    Versioning
-    Encryption
-    MFA Deletes
-    Secure your data using Access Control List and Buckets Policies
+    =====================
+    S3-Buckets creations
+    =====================
 
-S3 Storage Classes
-    S3-Standard
-        99.99% Availability,durability,stored redundantly across multiple devices in multiple facilities and is designed to sustain the loss of 2 facilities concurrently
-    S3-IA(Infrequently Accessed)
-        For data that is accessed less frequently, but requires rapid access when needed. Lower fee than S3, but you are charged a retrieve fee.
-    S3 One Zone-IA 
-        For Where you want a Lower-cost option for Infrequently accessed data, but do not requires the multiple Availability Zone data resilience.
-    S3- Intelligent Tiering
-        designed to optimize costs by automatically moving data to the most cost-effective access tier,without performance impact or operational overhead
-    S3-Glacier
-        S3 Glacier is a secure,durable,and low-cost storage class for data archiving. you can reliably store any amount of data at costs that are competitive with or cheaper than on-premises solutions. Retrieval times configurable from minutes to hours
-    S3-Glacier Deep Archive
-        S3 Glacier Deep Archive is Amazon S3's lowest-cost storage class where a retrieve tiem of 12 hours is acceptable.
+        Buckets Names are a universal name space
+        Bucket can store objects in regions
+        Storage class can be applied at objects level or buckets level
+        versioning will allow to have multiple copy of original data.
+        you can apply Transfer Acceleration
+        we can pulic access settins
+        access control list with buckets
+        cross oring replication can be done with buckets
+        you can set life cyle of objects
+        replication of s3 bucket can be done
+        upload an object to S3 receive a HTTP 200 Code
+        S3,S3-IA,S3-IA(One Zone), Glacier
+        control access to buckets using either a buckets ACL or using Buckets Policies
 
-S3-Charges based on
-    Storage
-    Requests
-    Storage Management Pricing
-    Data Transfer Pricing
-    Transfer Acceleration(CloudFront)
-    Cross Region Replication Pricing(high Availability)
+    S3-Security and Encryption:
+        by default all buckets are private and access control using Bucket Policies and Access Control lists
+        S3 buckets can be conigured to create access logs which log all requests made to the s3 bucket. This can be sent to another bucket and even another bucket in another account
+
+        Encryption in Transit is archived by
+            SS/TLS
+        Encryption at Rest(Server Side) is archived by
+            SSE-S3(aws managed keys)
+            SSE-KMS(aws key management service)
+            SSE-C(Server side Encryption with customers provided)
+            Client side Encryption(encrypt and upload on s3)
+
+    S3-Versioning
+        Stores all versions of an object(including all writes and even if you delete an object)
+        Great backup tool.
+        once enabled, versioning cannot be disabled, only suspended.
+        Integrates with Lifecycle rules
+        versioning MFA Delete capability, which uses MFA, can be used to provide an additional layer of Security
 
 
-Exam Tips
-    Remember that s3 is object based
-    files can be from 0 Bytes to 5 TB
-    There is unlimited storage
-    files are stored in Buckets
-    s3 is a universal namespace
-    https://s3-eu-west-1.Amazonaws.com/acloudguru
-    not suitable to install an operating system on.
-    successful uploads will generate a HTTP 200 Status Code
-    you can turn on MFS Deletes
-    key
-    Value
-    version id
-    Metadata
-    Subresources
-        access control lists
-        Torrents
-    Read after wirte consistency for PUTS of new object
-    Eventual Consistency for overwrite PUTS and DELETES
+    S3-Lifecycle Management and Glacier:
+        Automates moving your objects between the different storage tiers
+        we can set storage transition from stage wise
+        delete object after certain period
+        can be used in conjunction with versioning
+        can be applied to current versions and previous versions
 
-notes: Upon sign-up, new AWS customers receive 5 GB of Amazon S3 Standard storage, 20,000 Get Requests, 2,000 Put Requests, 15GB of data transfer in, and 15GB of data transfer out each month for one year.
+    Cross-Region-Replication:
+        versioning must be enabled on both the source and destination buckets
+        regions must be unique
+        files in an existing bucket are not replicated automatically
+        all subsequent updated files will be replicated automatically
+        delete markers are not replicated
+        deleting individual versions or delete markers will not be replicated
+        CORS replication require to enable versioning
+        you have to create IAM Roles
+        bucket has to be in different regions to replicates
+        as soon as we start make changes in bucket will 
+
+    Transfer Acceleration(ACG):
+        S3 Transfer Acceleration utilises the CloudFront Edge Network to accelerate your uploads to S3. Instead of uploading directly to your S3 bucket, you can use a distinct URL to upload directly
+        to an edge location which will then transfer that file to S3. you will get a distinct URL to upload to
+
+    CloudFront(CDN):
+        CDN is a system of distributed servers that deliver webpages and other web content to a user based on the geographic locations of the user, the origin of the webpage, and a content delivery server.
+
+        Key-terminology:
+            Edge Location:
+                This is the location where content will be cached. This is separate to an AWS Region/Az. its cached for time to live
+                Edge locations are not just READ only - you can write to them too.
+                You can clear cached objects, but you will be charged.
+            origin:
+                This is the origin of al lthe files that the CDN will distribute. This can be an S3 Bucket, an EC2 instance, an Elastic Load Balancer, or Route53.
+            distribution:
+                This is the name given the CDN which consists of a collection of Edge locations
+                Types of distribution:
+                    Web distribution:- typically used for websites
+                    RTMP:- Used for media streaming
+    SnowBall:
+        snowball is a petabyte-scale data transport solution that uses secure appliances to transfer large amounts of data into and out of AWS.
+        Using Snowball addresses common challenges with large-scale data transfers including high network costs, long transfer times, and Security concerns.
+        Transferring data with snowball is simple,fast,secure,and can be as little as one-fifth the cost of high-speed internet.            
+        Exam Tips:
+            Snowball can import to s3 and Export from s3
+    SnowballMobile:
+
+        ./snowball start -i 192.168.1.1 -m menifest-file.bin -u menifest-code then enter
+
+        echo "hello world"> hello.txt
+
+        ./snowball cp hello.txt s3://bucket-name then enter
+    
+    Storage Gateways:****
+        File Gate(NFS)
+        Volume Gateway:
+            Store disk(iscsi)
+            Cache disk(frequently used data)
+        Tape Volume
+        (NetBackup, Backup Exec, Veeam etc)
+
+        Exam Tips:
+            File Gateway:
+                file gateway -for flat files, stored directly on s3
+            Volume Gateway
+                Stored Volumes:- Entire Dataset is stored on site and is asynchronously backed up to S3
+                Cached Volumes:- Entire Dataset is stored on S3 and the most frequently accessed data is cached on site.
+            Gateway Virtual Tape Library
+            
+
+    
+
+
+
+
+
+
+
