@@ -17,3 +17,12 @@ def CreateTable();
     table=null
     cmd = 'create table '+table+'(id int auto_increment primary key not null, name text)'
     mycursor.execute(cmd)
+    return table
+
+def InsertData():
+    tbname = CreateTable()
+    cmd = 'INSERT TABLE '+tbname +' (name) VALUES (%s)'
+    val = (query)
+    mycursor.execute(cmd,val)
+    mydb.commit()
+
