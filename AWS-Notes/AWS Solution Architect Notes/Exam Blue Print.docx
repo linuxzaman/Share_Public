@@ -99,6 +99,10 @@ Exam Tips for IAM
     6.  You only get to view these once. if you lose them, you have to regenerate them. so, save them in a secure locations.
     7.  Always setup MFA on your root account.
     8.  you can create and customise your own password rotation Policies.
+    9.  Roles are more secure than storing your access key and secret access key on individual EC2 instances.
+    10. Roles are easier to manage.
+    11. Roles can be assigned to an EC2 instance after it is created using both the console & command line.
+    12. Roles are universal -- you can use them in any region
 
 ==================================================================================
                     Cloud Watch Billing Alarm
@@ -302,7 +306,189 @@ Exam Tips for IAM
                 Stored Volumes:- Entire Dataset is stored on site and is asynchronously backed up to S3
                 Cached Volumes:- Entire Dataset is stored on S3 and the most frequently accessed data is cached on site.
             Gateway Virtual Tape Library
-            
+
+============================================================
+***********EC2***********
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+============================================================
+EC2
+    Amazon Elastic Compute Cloud(EC2) is a web service that provides resiable compute capacity in the Cloud.
+    EC2 reduces the time required to obtain and boot new server instances to minutes, allowing you to quickly scale capcity, both up and down as your computing requirements change.
+    
+    EC2 Pricing Models
+        On Demand:
+            Allows you to pay a fixed rate by the hour with no commitment.
+        Reserved:
+            Provides you with a capcity reservation, and offer a significant discount on the hourly charge for an instance. contract Terms are 1 Year or 3 Year Terms
+                Reserved Type:
+                    Standard REserved instances(75% off)
+                    Convertible Reserved Instances(45%)
+                    Scheduled Reserved Instances(reserve time and scaling)
+        Spot:
+            Enables you to bid whatever price you want for instance capacity, providing for even greater savings if your applications have flexible start and end times.
+        Dedicated Hosts:
+            Physical EC2 server dedicated for your use. Dedicated Hosts can help you reduce costs by allowing you to use your existing server-bound software licenses.
+        
+    EC2 Instance Types- Mnemonic
+    F - For FPGA
+    I - For IOPS
+    G - GRAPHICS
+    H - HIGH DISK THROUGHPUT
+    T - CHEAP GENERAL PURPOSE(T2 MICRO)
+    D - FOR DENSITY
+    R - FOR RAM
+    M - MAIN CHOICE FOR GENERAL PURPOSE APPS
+    C - FOR COMPUTE
+    P - GRAPHICS
+    X - EXTREME MEMEORY
+    Z - EXTREME MEMEORY AND CPU
+    A - ARM BASED WORKLOADS
+    U - BARE METAL
+    
+    EC2- Security Groups:
+        All inbound traffic is blocked by default.
+        All Outbound traffic is allowed.
+        Changes to Security Groups take effect immediately.
+        You can have any number of EC2 instances within a security group.
+        You can have multiple security groups attached to EC2 Instances.
+        Security Groups are STATEFUL.
+        If you create an inbound rule allowing Traffic in, that traffic is automatically allowed back out again.
+        You cannot block specific IP addresses using security groups, Instead use Network Access Control Lists(NACL)
+        You can specify allow rules, but not deny rules.
+
+    
+        Exam Tips:
+            EC2 is compute capacity Virtual machine in Cloud.
+            Termination protection is turned off by default, you must turn it on.
+            on an EBS-backed instance, the default action is for the root EBS volume to be deleted when the instance is terminated.
+            EBS Root Volumes of your DEFAULT AMI's cannot be encrypted. You can also use a third party tool to encrypt the root volume, or this can be done when creating AMI's in the AWS console or using the API.
+            All inbound traffic is blocked by default.
+            All Outbound traffic is allowed.
+            Changes to Security Groups take effect immediately.
+            You can have any number of EC2 instances within a security group.
+            You can have multiple security groups attached to EC2 Instances.
+            Security Groups are STATEFUL.
+            If you create an inbound rule allowing Traffic in, that traffic is automatically allowed back out again.
+            You cannot block specific IP addresses using security groups, Instead use Network Access Control Lists(NACL)
+            You can specify allow rules, but not deny rules.
+            where ever is EC2 instance the EBS volume also stay in same regions
+
+     EBS(Amazon Elastic Block Store):
+        EBS provides persistent block storage volumes for use with amazon EC2instances in the AWS Cloud.
+        Each Amazon EBS volume is automatically replicated within its Availability Zone to protect you from  components failure, offering high Availability and durability.
+
+        EBS Volume Types:
+            GENERAL PURPOSE(SSD)-(most work load,gp2,1GIB- 16TB,16,000)
+            PROVISIONED IOPS(SSD)-(Databases,io1,4Gib-16TB,64,000)
+            THROUGHPUT OPTIMISED HARD DISK DRIVE-(Big Data and Data warehouses, st1, 500 -16TB,500)
+            COLD HARD DISK DRIVE--( File Servers,sc1,500-16TB,250)
+            MAGNETIC--(workloads where data is Infrequently accessed, Standard,1Gb-1TB,40-200)
+
+        EBS-SNAPSHOT EXAM TIPS
+            volume exists on EBS. Think of EBS as a virtual hard disk
+            Snapshots exist on S3. Think of snapshots as a photograph of the disk.
+            Snapshots are point in time copies of volumes
+            snapshots are incremental --- this means that only the blocks that have changed since your last snapshot are moved to S3.
+            if this is your first snapshot, it may take some time to create.
+            To create a snapshot for Amazon EBS VolumeS that serve as root devices, you should stop the instance before taking the snapshot.
+            However you can take a snap while the instance is running.
+            you can create AMI's from both Volumes and snapshots
+            you can change EBS Volume sizes on the fly, including changing the size and storage type.
+            volumes will Always be in the same Availability Zone as the EC2
+            To move an EC2 volume from one AZ to another, take a snapshot of it, create an AMI from the snapshot and then use the AMI to launch the EC2 instance in a new AZ.
+            To move an EC2 voluem from one region to another, take a snapshot of it, create an AMI from the snapshot and then copy the AMI from one region to the other. then use the copied AMI to launch the new EC2 instance in the new region
+        
+        instance AMI TYPES******VERY IMPORTANT
+
+            instance store volumes are sometime called Ephemeral storage.
+            instance store volumes cannot be stopped. if the underlying host fails you will lose your data.
+            EBS backed instances can be stopped. you will not lose the data on this instance if it is stopped.
+            you can reboot both, you will not lose your data.
+            By default, both ROOT volumes will be deleted on termination. However, with EBS volumes, you can tell AWS to keep the root device volume
+
+        Encrypted Root Device Volumes & Snapshots
+            snapshots of encrypted volumes are encrypted automatically
+            volumes restored from encrypted snapshots are encrypted automatically
+            you can share snapshots, but only if they are unencryted
+            These snapshots can be shared with other AWS accounts or made public.
+            create a snapshot of the unencryted root device volume
+            create a copy of the snapshot and select the encrypt option
+            create an ami from the encrypted snapshot
+            use that ami to launch new encrypted Instances
+
+    CloudWatch
+        Amazon CloudWatch is a monitoring service to monitor your AWS resources, as well as the applications that you run on AWS.
+        CloudWatch monitor performance.
+        monitoring:
+            Compute
+                EC2 Instances
+                Autoscaling Groups
+                Elastic Load Balancers
+                Route53 Health Checks
+            Storage & Content Delivery
+                EBS Volumes
+                Storage Gateways
+                CloudFront
+            Host level metrics consist of:
+                CPU
+                Network
+                disk
+                Status Check
+        AWS CloudTrail increases visibility into your user and resources activity by recording AWS management console actions and API calls. You can identity which users and accounts called AWS, the source IP address from which the calls were made, and when the calls occurred.
+        Exam Tips:
+            CloudWatch with ec2 will monitor events every 1 and 5 minutes detailed monitoring.
+            CloudWatch is all about performance.
+            CloudTrail is all about auditing or monitor API calls in the AWS Platform.
+            Dashboards -creates awesome dashboards to see what is happening with your AWS enviroment.
+            Alarms - Allows you to set Alarms that notify you when particular thresholds are hit.
+            Events -  Cloudwatch events helps you to respond to state changes in your AWS resources.
+            Logs - Cloudwatch logs helps you to aggregate, monitor, and store logs.
+
+    Instance Metadata
+        curl http://169.254.169.254/latest/user-data ( TO GET BOOTSTRAP DATA)
+        curl http://169.254.169.254/latest/meta-data ( TO GET meta-deta)
+
+        EXAM-TIPS
+            used to get Information about an instance such as public IP
+    
+    Elastic File SYSTEM:
+        Amazon EFS is a file storage service for EC2instances. 
+        Amazon EFS is easy to use and provides a simple interface that allows you to create and configure file systems quickly and easily.
+        With amazon EFS, Storage capcity is elastic, growing and shrinking automatically as you add and remove files, so your applications have the storage they need,when they need it.
+
+        Exam Tips:
+            supports the NFS4 protocol
+            you only pay for the storage you use
+            can scale up to the petabyte
+            can suport thousands of concurrent NFS connections
+            Data is stored across multiple AZ's within a region
+            Read After Write Consistency
+    
+    EC2 PLACEMENT GROUP:
+        Clustered Placement Group:
+            A cluster placement group is a grouping of instances within a single Availability Zone.
+            Placement groups are recommended for applications that need low network latency, high network throughput, or both.
+            Only certain instances can be launched in to a Clustered placement group.
+        
+        Spread Placement Group:
+            A spread placement group is a group of instances that are each placed on distinct underlying hardware.
+            Spread Placement groups are recommended for applications that have a small number of critical instances that should be kept separate from each other.
+        
+        Exam Tips:
+            A clustered placement group can't span multiple Availability zones.
+            a spread placement group can.
+            The name you specify for a placement group must be unique within your AWS account.
+            Only certain types of instances can be launched in a placement group(Compute Optimized, GPU, Memory Optimized, Storage Optimized)
+            AWS  recommended homogenous instances within placement groups
+            you can't merge placement groups
+            you can't move an existing instance into a placement group. you can create an AMI from your existing instance, and then launch a new instance from the AMI into a placement group.
+        
+
+
+
+
+
+    
 
     
 
