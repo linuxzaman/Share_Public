@@ -26,3 +26,10 @@ def InsertData():
     mycursor.execute(cmd,val)
     mydb.commit()
 
+
+~
+~
+~
+~
+~
+~

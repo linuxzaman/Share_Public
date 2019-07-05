@@ -483,7 +483,182 @@ EC2
             you can't merge placement groups
             you can't move an existing instance into a placement group. you can create an AMI from your existing instance, and then launch a new instance from the AMI into a placement group.
         
+=======================================
+*******RDS (OLTP) DATABASES*************
+=======================================
+    Relational Databases are what most of us are all used to . They have been around since the 70's.
+    Think of a traditional spreadsheet:
+        Database.
+            Tables
+            Row
+            Fields(Columns)
+    Relational databases on AWS:
+        SQL Server
+        Oracle
+        MySQL Server
+        PostgreSQL
+        Aurora
+        MariaDB
+    
+    RDS has two key features:
+        MULTI-AZ -For Disaster Recovery
+        READ REPLICAS- FOR PERFORMANCE
 
+        MULTI-AZ
+            amazon has RDS which can have multi Az.
+        READ REPLICAS:
+            mostsly you can have 5 replicates
+
+    NON-RELATIONAL DATABASES ARE AS FOLLOWS:
+        COLLECTION === Tables
+        DOCUMENTS === Row
+        KEY VALUE PAIRS == Fields
+
+    OLTP vs OLAP:
+        ONLINE TRANSACTION PROCESSING (OLTP) differs from OLAP Online Analytics processing (OLAP) in terms of the types of queries you will run.
+
+    ElastiCache:
+        ElastiCache is a web service that makes it easy to deploy, operate, and scale an in-memory cache in the cloud. The service improves the performance of web applications by allowing you to retrieve information from fast , managed, in-memeory caches, instad of relying entirely on slower disk-based databases.
+
+        ElastiCache supports two open-source in-memeory caching engines:
+            MEMCHACHED
+            REDIS
+
+    EXAM TIPS
+        RDS runs on virtual machines
+        you cannot log in to those operating systems however.
+        Patching of the RDS operating System and DB is Amazon's responsibility
+        RDS is NOT serverless
+        Aurora serverless IS Serverless
+    
+    RDS Backups, Multi-AZ & Read Replicas
+        AUTOMATED Backups
+        SNAPSHOTS
+    Read Replicas are Available for the following databases:
+        MySQL server
+        PostgreSQL
+        MariaDB
+        Aurora
+    MULTI-AZ is Available for the following databases:
+        SQL Server
+        Oracle
+        MySQL Server
+        PostgreSQL
+        MariaDB
+
+    EXAM TIPS:
+        #   There are two different types of Backups for RDS:
+                AUTOMATED Backups
+                Database Snapshots
+        #   Read Replicas:
+                can be multi-Az.
+                Used to increase performance.
+                Must have backups turned on.
+                can be in different regions.
+                can be Aurora or MySQL.
+                can be promoted to master, this will break the Read Replica
+        #   MULTI-AZ:
+                Used for DR.
+                You can force a failover from one AZ to another by rebooting the RDS instance
+        #   Encrytpion at rest is suported for MySQL,Oracle,SQL Server, PostgreSQL, MariaDB and Aurora.
+            Encrytpion is done using the aws key management service(KMS) service. Once your RDS instance is encrypted, the data stored at rest in the underlying storage is encrypted,as are its autmated backups, read replicas, and snapshots.
+
+
+DynamoDB 
+    amaozn DynamoDB is a fast and flexible NoSQL database service for all aplications that need consistent, single-digit millisecond latency at any scale.
+    it is a fully managed database and supports both document and key-value data models.
+    its flexible data model and reliable performance make it a great fit for mobile, web, gaming, ad-tech, ioT, and many other applications.
+    Exam Tips:
+        Stored on SSD Storage
+        Spread across 3 geographical distinct data Centres.
+        Eventual consistent Reads(DEFAULT).
+            consitency across all copies of data is usally reached within a second. Repeating a read after a short time should return the updated data.
+        Strongly Consistent Reads.
+            A strongly consitent read returns a result that reflects all writes that received a successful response prior to the read.
+        
+RedShift(OLAP):
+    Amazon RedShift is a fast and powerful, fully managed, petabyte-scale data warehouses service in the cloud. 
+    Customers can start small for just $0.25 per hour with no commitments or upfront costs and scale to a petabyte or more for $1,000 per terabyte per year, less than a tenth of most other data warehousing solutions
+
+    Redshift can be configured as follows:
+        Single Node(160Gb)
+        Multi-Node
+            Leader Node(manage Client connections and receives queries)
+            Compute Node(store data and perform queries and computations). Up to 128 compute Nodes.
+
+    Backups:
+        Enabled by default with a 1 day rentention period.
+        Maximum rentention period is 35 days.
+        Redshift Always attempts to maintain at  least three copies of your data(the original and replica on the compute nodes and a backup in amazon S3)
+        Redshift can also asynchronously replicate your snapshots to S3 in another region for disaster Recovery.
+    
+    Security Considerations:
+        encrypted in transit using SSL.
+        encrypted at rest using AES-256 Encryption.
+        By default RedShift takes care of key management.
+            Manage your own keys through HSM.
+            AWS key management service.
+    
+    Redshift Availability:
+        currently only Available in 1 AZ.
+        Can restore snapshots to new AZs in the events of an outage.
+        Redshift is used for business intelligence.
+
+Amazon Aurora:
+    amazon aurora is a mysql compatible, relational database engine that combines the speed and Availability of high-end commercial databases with the simplicity and cost-effectiveness of open source databases.
+    amazon aurora provides up to five times better performance than MySQL at a price point one tenth that of a commercial database while delivering similar performance and Availability.
+
+    Things to know about Aurora:
+        Start with 10GB, scales in 10GB increments to 64TB (Storage Autoscaling)
+        Compute resources can scale up to 32v CPUs and 244GB of Memory.
+        2 copies of your data is contained in each Availability zone, with minimum of 3 Availability zones. 6 copies of your data.
+    
+    Scaling Aurora:
+        Aurora is designed to trasparently handle the loss of up to two copies of data without affecting database write Availability and up to three copies without affecting read Availability.
+        Aurora storage is also self-handlling. Data blocks and disks are continuously scanned for errors and repaied automatically.
+    
+    Aurara Replicas are Available:
+        Aurora Replicas(currently 15)
+        MySQL Read Replicas (currently 5)
+    
+    Backups with Aurora:
+        Automated backups are Always enabled on amazon aurora DB instances. Backups do not impact database performance.
+        you can also take snapshots with aurora. This also do not impact database performance.
+        You can share Aurora Snapshots with other AWS accounts.
+    
+    ElastiCache
+        |--- MEMCHACHED
+        |--- Reddis
+        
+        use elasticache to increase database and web application performance
+        Reddis is MULTI-AZ
+        you can do back ups and restores of Reddis.
+        
+        --------------------------------------------------------------
+        |requirements                        | MEMCHACHED |  REDIS   |
+        --------------------------------------------------------------
+        Simple Cachle to offload DB             YES         YES
+        ability to scale horizontally           YES         NO
+        multi-threaded performance              YES         NO
+        advanced data types                     NO         YES
+        Ranking/Sorting data sets.              NO         YES
+        Pub/Sub capabilities.                   NO         YES
+        Persistence                             NO         YES
+        Multi-AZ                                NO         YES
+        Backup & Restore Capabiliteis           NO         YES
+
+    RDS:
+        RDS TYPES
+        Backups
+        MULTI-AZ
+        Encryption
+        Read-Replicas
+        DynamoDB
+        
+    SUMMARY:
+        RDS runs on virtual machines
+        you cannot log in to these o.s however.
+        Patching of the RDS O.S and DB is amazon responsibility
 
 
 
